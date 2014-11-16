@@ -6,61 +6,14 @@ int x=0;// index of the array
 int seconds=0;
 boolean inputLastTime=false;
 
-void setup(){
-Serial.begin(9600);
-pinMode(ledPin,OUTPUT);
-pinMode(switchPin,INPUT);
-
-MorseCodeHandler bob= new ;MorseCodeHandler();
-}
-void loop(){
- 
-  seconds=millis()/1000;
-  
-  int i=0;// initialize here because you want it to reset everytime
-  x++;
-  //Reading shit
-  switchState=digitalRead(switchPin);
-  
-  
-  //Sentinel
-  if(!inputLastTime&&seconds>2||x==4){
-    x=0;
-    bob.acceptInput(rawData[]);
-    rawData[0]=2;
-    rawData[1]=2;
-    rawData[2]=2;
-    rawData[3]=2;
-    rawData[4]=2;
-    Serial.print();
-  }
-  
-  if(switchState==HIGH){
-    i++;
-    inputLastTime=true;
-  }
-  else
-   inputLastTime=false; 
-  
-  // using shit
-  if(i==1||i==2){
-    rawData[x]=0;  
-  }
-  else{
-    rawData[x]=1;
-  }
-  
- delay(110);
-}
-
-
- class MorseCodeHandler {
-
-   String letter;
-	
-	 MorseCodeHandler()
+class MorseCodeHandler 
+{
+  private:
+    String letter;
+  public:
+	MorseCodeHandler()
 	{
-		letter = "";
+	  letter = "";
 	}
 	
 	/**
@@ -169,3 +122,54 @@ void loop(){
 		return letter;
 	}
 };
+
+MorseCodeHandler bob;
+
+void setup(){
+
+  Serial.begin(9600);
+  pinMode(ledPin,OUTPUT);
+  pinMode(switchPin,INPUT);
+
+};
+void loop(){
+    
+ 
+  seconds=millis()/1000;
+  
+  int i=0;// initialize here because you want it to reset everytime
+  x++;
+  //Reading shit
+  switchState=digitalRead(switchPin);
+  
+  
+  //Sentinel
+  if(!inputLastTime&&seconds>2||x==4){
+    x=0;
+    bob.acceptInput(rawData);
+    Serial.println(bob.getWord());
+    rawData[0]=2;
+    rawData[1]=2;
+    rawData[2]=2;
+    rawData[3]=2;
+    rawData[4]=2;
+  }
+  
+  if(switchState==HIGH){
+    i++;
+    inputLastTime=true;
+  }
+  else
+   inputLastTime=false; 
+  
+  // using shit
+  if(i==1||i==2){
+    rawData[x]=0;  
+  }
+  else{
+    rawData[x]=1;
+  }
+  
+  
+ delay(110);
+}
