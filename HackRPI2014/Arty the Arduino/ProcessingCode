@@ -6,7 +6,7 @@ String message= "Hack(RPI); Morse Code Project";
 PImage logo;
 
 void setup() {
-  String portName= Serial.list()[];
+  String portName = Serial.list()[0];
   myPort = new Serial(this, portName, 9600);
   size(1024, 568);
   logo=loadImage("Logo.jpg");
