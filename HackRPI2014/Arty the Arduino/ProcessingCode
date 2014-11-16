@@ -1,0 +1,32 @@
+import processing.serial.*;
+Serial myPort;
+
+int xPos=1000;
+String message= "Hack(RPI); Morse Code Project";
+PImage logo;
+
+void setup() {
+  String portName= Serial.list()[];
+  myPort = new Serial(this, portName, 9600);
+  size(1024, 568);
+  logo=loadImage("Logo.jpg");
+}
+
+void draw() {
+  background(85, 85, 85);
+  image(logo,250,0);
+
+  textSize(30);
+  fill(255, 0, 0);
+  text(message, xPos, 300);
+  xPos--;
+  
+  if(xPos<=0){
+    xPos=1000;
+   if ( myPort.available() > 0) 
+  {  // If data is available,
+  message = myPort.readStringUntil('\n');         // read it and store it in val
+  } 
+  }
+  
+}
