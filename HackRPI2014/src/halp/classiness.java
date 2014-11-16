@@ -3,7 +3,7 @@ package halp;
 public class classiness {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		System.out.println("FUCK ALL OF THIS");
 
 	}
 
